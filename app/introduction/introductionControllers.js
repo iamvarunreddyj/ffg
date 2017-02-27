@@ -1,4 +1,4 @@
-var introductionModule = angular.module('introductionModule', []);
+var introductionModule = angular.module('introductionPageModule', []);
 
 // Introduction Page Controller
 introductionModule.controller('introPageController', ['$scope', function($scope){

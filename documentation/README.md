@@ -1,4 +1,3 @@
-# README #
 
 # Project Innovation Goals :-
 

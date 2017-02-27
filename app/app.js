@@ -1,4 +1,10 @@
 var flyGenetics = angular.module('flyGenetics',
                                 ['ngRoute',
-                                    'homeModule',
-                                    'introductionModule']);
+                                'ui.router',
+                                'welcomePageModule',
+                                'homePageModule',
+                                'introductionPageModule']);
+
+flyGenetics.controller('mainController', ['$scope', '$state', function($scope, $state) {
+    $state.go('welcome');
+}])
