@@ -10,5 +10,15 @@ flyGenetics.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 			templateUrl : 'app/homePage/homePage.html',
 			controller : 'homePageController'
 		})
+		.state('home.intro', {
+			url : '/introduction',
+			templateUrl : 'app/introduction/introduction.html',
+			controller : 'introPageController'
+		})
+
+
+	$urlRouterProvider.when('', '/');
+
+	$urlRouterProvider.otherwise('/');
 
 }]);
