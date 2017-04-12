@@ -3,7 +3,8 @@ var flyGenetics = angular.module('flyGenetics',
                                 'ui.router',
                                 'welcomePageModule',
                                 'homePageModule',
-                                'introductionPageModule']);
+                                'introductionPageModule',
+                                'phenotypeSelectionModule']);
 
 flyGenetics.controller('mainController', ['$scope', '$state', function($scope, $state) {
     $state.go('welcome');
