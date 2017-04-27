@@ -1,0 +1,93 @@
+<div class="container">
+
+    <h2>Select cross type :</h2>
+    <select id="crossTypeSelection" class="form-control" ng-model="crossType">
+      <option ng-repeat="data in crossTypesAvailable" value="{{data}}">{{data}}</option>
+    </select>
+
+    <div ng-show="monoHybridCross() || diHybridCross() || triHybridCross()" class="col-md-12 col-lg-12">
+        <h3>Select phenotype for parents type 1 :</h3>
+        <select id="phenoTypeSelection" class="form-control" ng-model="selectedPhenotypeOne" >
+          <option ng-repeat="data in phenotypeData" value="{{data.phenotype}}">{{data.phenotype}}</option>
+        </select>
+
+        <div ng-if="dataForPhenotypeOne" class="col-md-6 col-lg-6">
+            <h4>Select dominant trait :</h4>
+            <div class="radio" ng-repeat="data in dataForPhenotypeOne" id="eyeShapeSelection">
+                <label>
+                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="selectionData.phenotypeOne.dominant">
+                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
+                </label>
+            </div>
+        </div>
+
+        <div ng-if="dataForPhenotypeOne" class="col-md-6 col-lg-6">
+            <h4>Select recessive trait :</h4>
+            <div class="radio" ng-repeat="data in dataForPhenotypeOne" id="eyeShapeSelection">
+                <label>
+                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="selectionData.phenotypeOne.recessive">
+                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
+                </label>
+            </div>
+        </div>
+    </div>
+
+
+    <div ng-show="diHybridCross() || triHybridCross()" class="col-md-12 col-lg-12">
+        <h3>Select phenotype for parents type 2 :</h3>
+        <select id="phenoTypeSelection" class="form-control" ng-model="selectedPhenotypeTwo">
+          <option ng-repeat="data in phenotypeData" value="{{data.phenotype}}">{{data.phenotype}}</option>
+        </select>
+
+        <div ng-if="dataForPhenotypeTwo" class="col-md-6 col-lg-6">
+            <h4>Select dominant trait :</h4>
+            <div class="radio" ng-repeat="data in dataForPhenotypeTwo" id="eyeShapeSelection">
+                <label>
+                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="selectionData.phenotypeTwo.dominant">
+                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
+                </label>
+            </div>
+        </div>
+         <div ng-if="dataForPhenotypeTwo" class="col-md-6 col-lg-6">
+            <h4>Select recessive trait :</h4>
+            <div class="radio" ng-repeat="data in dataForPhenotypeTwo" id="eyeShapeSelection">
+                <label>
+                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="selectionData.phenotypeTwo.recessive">
+                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
+                </label>
+            </div>
+        </div>
+    </div>
+
+
+    <div  ng-show="triHybridCross()" class="col-md-12 col-lg-12">
+        <h3>Select phenotype for parents type 3 :</h3>
+        <select id="phenoTypeSelection" class="form-control" ng-model="selectedPhenotypeThree">
+          <option ng-repeat="data in phenotypeData" value="{{data.phenotype}}">{{data.phenotype}}</option>
+        </select>
+
+        <div ng-if="dataForPhenotypeThree" class="col-md-6 col-lg-6">
+            <h4>Select dominant trait :</h4>
+            <div class="radio" ng-repeat="data in dataForPhenotypeThree" id="eyeShapeSelection">
+                <label>
+                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="selectionData.phenotypeThree.dominant">
+                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
+                </label>
+            </div>
+        </div>
+        <div ng-if="dataForPhenotypeThree" class="col-md-6 col-lg-6">
+            <h4>Select recessive trait :</h4>
+            <div class="radio" ng-repeat="data in dataForPhenotypeThree" id="eyeShapeSelection">
+                <label>
+                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="selectionData.phenotypeThree.recessive">
+                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <button style="margin-top:35px" class="btn btn-primary" type="submit" ng-click="generateOffspring()" >Generate Offspring</button>
+
+    <p>{{offspringResult}}</p>
+
+</div>

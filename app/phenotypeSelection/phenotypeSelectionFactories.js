@@ -8,19 +8,19 @@ phenotypeSelectionApp.factory('phenotypeFactory', [function () {
                         {
                             "name": "Red Eye",
                             "genotype": "+",
-                            "Descrition": "Wild type",
+                            "descrition": "Wild type",
                             "isDominant": "true",
                         },
                         {
                             "name": "White Eye",
                             "genotype": "w",
-                            "Descrition": "White eyes",
+                            "descrition": "White eyes",
                             "isDominant": "false"
                         },
                         {
                             "name": "Sepia Eye",
                             "genotype": "se",
-                            "Descrition": "Eyes brownish to black with age",
+                            "descrition": "Eyes brownish to black with age",
                             "isDominant": "false"
                         }
                     ]
@@ -31,25 +31,25 @@ phenotypeSelectionApp.factory('phenotypeFactory', [function () {
                         {
                             "name": "Normal",
                             "genotype": "+",
-                            "Descrition": "Wild type",
+                            "descrition": "Wild type",
                             "isDominant": "true",
                         },
                         {
                             "name": "Eyeless",
                             "genotype": "",
-                            "Descrition": "Eyes reduced",
+                            "descrition": "Eyes reduced",
                             "isDominant": "false"
                         },
                         {
                             "name": "Lobed",
                             "genotype": "L",
-                            "Descrition": "Small eyes on pedicule",
+                            "descrition": "Small eyes on pedicule",
                             "isDominant": "true"
                         },
                         {
                             "name": "Bar",
                             "genotype": "B",
-                            "Descrition": "Long, narrow eyes",
+                            "descrition": "Long, narrow eyes",
                             "isDominant": "true"
                         }
                     ]
@@ -58,25 +58,24 @@ phenotypeSelectionApp.factory('phenotypeFactory', [function () {
 
             return dataList;
         },
-        prepareForPrediction : function(genotypeOne, genotypeTwo, genotypeThree) {
+        prepareForPrediction : function(selection) {
             var result = [];
-
-            if(genotypeOne != undefined && genotypeTwo != undefined && genotypeThree != undefined) {
-                for(i=0; i<genotypeOne.length; i++) {
-                    for(j=0; j<genotypeTwo.length; j++) {
-                        for(k=0; k<genotypeThree.length; k++) {
-                            result.push([genotypeOne[i],genotypeTwo[j],genotypeThree[k]]);
+            if(selection.length == 3) {
+                for(i=0; i < selection[0].length; i++) {
+                    for(j=0; j < selection[1].length; j++) {
+                        for(k=0; k < selection[2].length; k++) {
+                            result.push([selection[0][i],selection[1][j],selection[2][k]]);
                         }
                     }
                 }
-            } else if (genotypeOne != undefined && genotypeTwo != undefined) {
-                for(i=0; i<genotypeOne.length; i++) {
-                    for(j=0; j<genotypeTwo.length; j++) {
-                        result.push([genotypeOne[i],genotypeTwo[j]]);
+            } else if (selection.length == 2) {
+                for(i=0; i<selection[0].length; i++) {
+                    for(j=0; j<selection[1].length; j++) {
+                        result.push([selection[0][i],selection[1][j]]);
                     }
                 }
-            } else if (genotypeOne != undefined) {
-                return genotypeOne;
+            } else if (selection.length == 1) {
+                return selection[0];
             }
 
             return result;
@@ -101,5 +100,29 @@ phenotypeSelectionApp.factory('phenotypeFactory', [function () {
 
             return offspring;
         },
+        crossTypesAvailable : [
+            'Mono-Hybrid',
+            'Di-Hybrid',
+            'Tri-Hybrid'
+        ],
+        getMasterDataForSelectedPhenotype : function(selectedPhenotype) {
+            var phenotypeList = this.getPhenotypesList();
+            for (i = 0 ; i < phenotypeList.length ; i++) {
+                if(phenotypeList[i].phenotype == selectedPhenotype) {
+                    return phenotypeList[i].alleles;
+                }
+            }
+        },
+        getGenotypeForName : function(genotype) {
+            var phenotypeList = this.getPhenotypesList();
+            for (i = 0 ; i < phenotypeList.length ; i++) {
+                var alleles = phenotypeList[i].alleles;
+                for (j = 0 ; j < alleles.length ; j++) {
+                    if(alleles[j].name == genotype) {
+                        return alleles[j].genotype;
+                    }
+                }
+            }
+        }
     };
 }]);
