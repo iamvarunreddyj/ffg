@@ -1,9 +1,15 @@
 var phenotypeSelectionApp = angular.module("phenotypeSelectionModule", []);
 
-phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phenotypeFactory', function($scope, phenotypeFactory) {
+phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phenotypeFactory', '$cacheFactory', '$state', function($scope, phenotypeFactory, $cacheFactory, $state) {
     $scope.phenotypeData = phenotypeFactory.getPhenotypesList();
     $scope.crossTypesAvailable = phenotypeFactory.crossTypesAvailable;
-
+    
+    if($cacheFactory.get('offspring')) {
+        $scope.cache = $cacheFactory.get('offspring');
+    } else {
+        $scope.cache = $cacheFactory('offspring');
+    }
+    
     $scope.$watch('selectedPhenotypeOne', function() {
         $scope.dataForPhenotypeOne = phenotypeFactory.getMasterDataForSelectedPhenotype($scope.selectedPhenotypeOne);
     });
@@ -42,8 +48,12 @@ phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phen
         if(parentSelection != undefined && parentSelection.length > 0) {
             var preProcessSelection = phenotypeFactory.prepareForPrediction(parentSelection);
             $scope.offspringResult = phenotypeFactory.predict(phenotypeFactory.prepareForPrediction(parentSelection));
+            if($scope.offspringResult) {
+                $scope.cache.put('f1', $scope.offspringResult);
+                $state.go('home.offspringDisplay')
+            }
         } else {
-           Console.log("Please select required phenotypes.")
+           console.log("Please select required phenotypes.")
         }
     }
 

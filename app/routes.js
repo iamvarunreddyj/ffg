@@ -20,6 +20,11 @@ flyGenetics.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
             templateUrl: 'app/phenotypeSelection/phenotypeSelectionTemplate.html',
             controller: 'phenotypeSelectionController'
         })
+        .state('home.offspringDisplay', {
+            url: '/offspringDisplay',
+            templateUrl: 'app/offspringDisplay/offspringDisplayTemplate.html',
+            controller: 'offspringDisplayController'
+        })
 
 
     $urlRouterProvider.when('', '/');

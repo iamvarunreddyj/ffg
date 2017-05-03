@@ -4,7 +4,8 @@ var flyGenetics = angular.module('flyGenetics',
                                 'welcomePageModule',
                                 'homePageModule',
                                 'introductionPageModule',
-                                'phenotypeSelectionModule']);
+                                'phenotypeSelectionModule',
+                                'offspringDisplayModule']);
 
 flyGenetics.controller('mainController', ['$scope', '$state', function($scope, $state) {
     $state.go('welcome');
