@@ -5,6 +5,7 @@ offspringDisplay.controller('offspringDisplayController',['$scope', '$state', '$
     
     $scope.fOneOffspring = "";
     if($scope.cache) {
-        $scope.fOneOffspring = $scope.cache.get('f1');
-    } 
+        $scope.fOneOffspring = $scope.cache.get('f1.results');
+        $scope.fOneParents = $scope.cache.get('f1.parents');
+    }
 }]);

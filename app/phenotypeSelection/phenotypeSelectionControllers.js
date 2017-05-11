@@ -41,66 +41,58 @@ phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phen
         return false;
     }
 
-    $scope.selectionData = {};
-
     $scope.generateOffspring = function() {
-        var parentSelection = $scope.validateAndFetch()
-        if(parentSelection != undefined && parentSelection.length > 0) {
-            var preProcessSelection = phenotypeFactory.prepareForPrediction(parentSelection);
-            $scope.offspringResult = phenotypeFactory.predict(phenotypeFactory.prepareForPrediction(parentSelection));
+        var parentSelection = $scope.validateAndFetchSelectedData();
+        parentSelection = phenotypeFactory.assignPunnettSquareNotations(parentSelection);
+        $scope.cache.put('f1.parents', parentSelection);
+        var preProcessedSelection = phenotypeFactory.preProcessSelectedData(parentSelection);
+        if(preProcessedSelection != undefined && preProcessedSelection.length > 0) {
+            $scope.offspringResult = phenotypeFactory.predict(phenotypeFactory.prepareForPrediction(preProcessedSelection));
             if($scope.offspringResult) {
-                $scope.cache.put('f1', $scope.offspringResult);
+                $scope.cache.put('f1.results', $scope.offspringResult);
                 $state.go('home.offspringDisplay')
             }
         } else {
            console.log("Please select required phenotypes.")
         }
     }
-
-    $scope.validateAndFetch = function () {
-        var parents = []
-        var traitOne = $scope.getPhenotypeOneSelection()
-        if (traitOne != undefined) {
-            parents.push(traitOne);
+    
+    // Phenotype data
+    $scope.phenotypeOne = {}
+    $scope.phenotypeTwo = {}
+    $scope.phenotypeThree = {}
+    
+    $scope.validateAndFetchSelectedData = function () {
+        $scope.selectedData = [];
+        if ($scope.phenotypeOne != undefined &&
+            $scope.phenotypeOne.dominant != undefined &&
+            $scope.phenotypeOne.recessive != undefined) {
+            $scope.selectedData.push($scope.formatSelectedDataAndReturnFullSelectionDetails($scope.phenotypeOne.dominant, $scope.phenotypeOne.recessive));
+        }
+        if ($scope.phenotypeTwo != undefined &&
+            $scope.phenotypeTwo.dominant != undefined &&
+            $scope.phenotypeTwo.recessive != undefined) {
+            $scope.selectedData.push($scope.formatSelectedDataAndReturnFullSelectionDetails($scope.phenotypeTwo.dominant, $scope.phenotypeTwo.recessive));
+        }
+        if ($scope.phenotypeThree != undefined &&
+            $scope.phenotypeThree.dominant != undefined &&
+            $scope.phenotypeThree.recessive != undefined) {
+            $scope.selectedData.push($scope.formatSelectedDataAndReturnFullSelectionDetails($scope.phenotypeThree.dominant, $scope.phenotypeThree.recessive));
         }
 
-        var traitTwo = $scope.getPhenotypeTwoSelection()
-        if (traitTwo != undefined) {
-            parents.push(traitTwo);
-        }
-
-        var traitThree = $scope.getPhenotypeThreeSelection()
-        if (traitThree != undefined) {
-            parents.push(traitThree);
-        }
-
-        return parents;
+        return $scope.selectedData;
     }
-
-    $scope.getPhenotypeOneSelection = function () {
-        if ($scope.selectionData!= undefined &&
-            $scope.selectionData.phenotypeOne != undefined &&
-            $scope.selectionData.phenotypeOne.dominant != undefined &&
-            $scope.selectionData.phenotypeOne.recessive != undefined) {
-            return [phenotypeFactory.getGenotypeForName($scope.selectionData.phenotypeOne.dominant), phenotypeFactory.getGenotypeForName($scope.selectionData.phenotypeOne.recessive)];
-        }
-    }
-
-    $scope.getPhenotypeTwoSelection = function () {
-        if ($scope.selectionData!= undefined &&
-            $scope.selectionData.phenotypeTwo != undefined &&
-            $scope.selectionData.phenotypeTwo.dominant != undefined &&
-            $scope.selectionData.phenotypeTwo.recessive != undefined) {
-            return [phenotypeFactory.getGenotypeForName($scope.selectionData.phenotypeTwo.dominant), phenotypeFactory.getGenotypeForName($scope.selectionData.phenotypeTwo.recessive)];
-        }
-    }
-
-    $scope.getPhenotypeThreeSelection = function () {
-        if ($scope.selectionData!= undefined &&
-            $scope.selectionData.phenotypeThree != undefined &&
-            $scope.selectionData.phenotypeThree.dominant != undefined &&
-            $scope.selectionData.phenotypeThree.recessive != undefined) {
-            return [phenotypeFactory.getGenotypeForName($scope.selectionData.phenotypeThree.dominant), phenotypeFactory.getGenotypeForName($scope.selectionData.phenotypeThree.recessive)];
+    
+    $scope.formatSelectedDataAndReturnFullSelectionDetails = function(dominantPhenotype, recessivePhenotype) {
+        return {
+            dominant : {
+                phenotype : dominantPhenotype,
+                genotype : phenotypeFactory.getGenotypeForName(dominantPhenotype)
+            },
+            recessive : {
+                phenotype : recessivePhenotype,
+                genotype : phenotypeFactory.getGenotypeForName(recessivePhenotype)
+            }
         }
     }
 

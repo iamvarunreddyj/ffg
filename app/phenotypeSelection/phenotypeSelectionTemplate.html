@@ -15,7 +15,7 @@
             <h4>Select dominant trait :</h4>
             <div class="radio" ng-repeat="data in dataForPhenotypeOne" id="eyeShapeSelection">
                 <label>
-                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="selectionData.phenotypeOne.dominant">
+                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="phenotypeOne.dominant">
                     <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
                 </label>
             </div>
@@ -25,7 +25,7 @@
             <h4>Select recessive trait :</h4>
             <div class="radio" ng-repeat="data in dataForPhenotypeOne" id="eyeShapeSelection">
                 <label>
-                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="selectionData.phenotypeOne.recessive">
+                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="phenotypeOne.recessive">
                     <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
                 </label>
             </div>
@@ -43,7 +43,7 @@
             <h4>Select dominant trait :</h4>
             <div class="radio" ng-repeat="data in dataForPhenotypeTwo" id="eyeShapeSelection">
                 <label>
-                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="selectionData.phenotypeTwo.dominant">
+                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="phenotypeTwo.dominant">
                     <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
                 </label>
             </div>
@@ -52,7 +52,7 @@
             <h4>Select recessive trait :</h4>
             <div class="radio" ng-repeat="data in dataForPhenotypeTwo" id="eyeShapeSelection">
                 <label>
-                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="selectionData.phenotypeTwo.recessive">
+                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="phenotypeTwo.recessive">
                     <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
                 </label>
             </div>
@@ -70,7 +70,7 @@
             <h4>Select dominant trait :</h4>
             <div class="radio" ng-repeat="data in dataForPhenotypeThree" id="eyeShapeSelection">
                 <label>
-                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="selectionData.phenotypeThree.dominant">
+                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="phenotypeThree.dominant">
                     <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
                 </label>
             </div>
@@ -79,7 +79,7 @@
             <h4>Select recessive trait :</h4>
             <div class="radio" ng-repeat="data in dataForPhenotypeThree" id="eyeShapeSelection">
                 <label>
-                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="selectionData.phenotypeThree.recessive">
+                    <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="phenotypeThree.recessive">
                     <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
                 </label>
             </div>

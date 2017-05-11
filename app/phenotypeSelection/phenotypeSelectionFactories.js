@@ -123,6 +123,43 @@ phenotypeSelectionApp.factory('phenotypeFactory', [function () {
                     }
                 }
             }
-        }
+        },
+        getCapitalAlphabets : function() {
+            return "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        },
+        getSmallAlphabets : function() {
+            return "abcdefghijklmnopqrstuvwxyz";
+        },
+        assignPunnettSquareNotations : function (selectedData) {
+            var capitalAlphabets = this.getCapitalAlphabets();
+            var smallAlphabets = this.getSmallAlphabets();
+
+            angular.forEach(selectedData, function (value, key) {
+                value.dominant.alphabet = capitalAlphabets.charAt(key);
+                value.recessive.alphabet = smallAlphabets.charAt(key);
+            });
+            return selectedData;
+        },
+        preProcessSelectedData : function(selectedData) {
+            var preProcessedSelection = []
+             angular.forEach(selectedData, function (value, key) {
+                preProcessedSelection.push([value.dominant.alphabet, value.recessive.alphabet])
+            });
+            
+            return preProcessedSelection;
+        },
+        formatSelectedDataAndReturnFullSelectionDetails: function (dominantPhenotype, recessivePhenotype) {
+            return {
+                dominant: {
+                    phenotype: dominantPhenotype,
+                    genotype: this.getGenotypeForName(dominantPhenotype)
+                },
+                recessive: {
+                    phenotype: recessivePhenotype,
+                    genotype: this.getGenotypeForName(recessivePhenotype)
+                }
+            }
+        },
+                                                   
     };
 }]);
