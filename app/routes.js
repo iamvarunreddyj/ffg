@@ -1,16 +1,22 @@
 flyGenetics.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-        .state('welcome', {
-            url: '/',
-            templateUrl: 'app/welcomePage/welcomePage.html',
-            controller: 'welcomePageController'
-        })
         .state('home', {
             url: '/home',
             templateUrl: 'app/homePage/homePage.html',
             controller: 'homePageController'
         })
-        .state('home.intro', {
+        .state('home.welcome', {
+            url: '/welcome',
+            
+            controller: 'welcomePageController',
+            views : {
+                '' : {templateUrl: 'app/welcomePage/welcomePage.html'},
+                'introduction@home.welcome' : {
+                    templateUrl: 'app/introduction/introduction.html'
+                }
+            }
+        })
+        .state('home.introduction', {
             url: '/introduction',
             templateUrl: 'app/introduction/introduction.html',
             controller: 'introPageController'
@@ -27,8 +33,8 @@ flyGenetics.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
         })
 
 
-    $urlRouterProvider.when('', '/');
+    $urlRouterProvider.when('', '/home/welcome');
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/home/welcome');
 
 }]);
