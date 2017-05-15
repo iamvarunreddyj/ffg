@@ -1,13 +1,142 @@
-<div class="modal fade" id="myLargeModalLabel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
-                <h4 class="modal-title" id="modal-title"></h4>
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Vocabulary Terms
+        </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                <p>
+                    <b>GENOTYPE</b>
+                    <br> The genes present in the DNA of an organism. We will use a pair of letters (ex: Tt or YY or ss, etc.) to represent genotypes for one particular trait. There are always two letters in the genotype because (as a result of sexual reproduction) one code for the trait comes from mama organism & the other comes from papa organism, so every offspring gets two codes (two letters). Now, turns out there are three possible GENOTYPES - two big letters (like "TT"), one of each ("Tt"), or two lowercase letters ("tt").
+                </p>
+                <p>
+                    <b>HOMOZYGOUS</b>When we have two capital or two lowercase letters in the GENOTYPE (ex: TT or tt) it's called HOMOZYGOUS ("homo" means "the same"). Sometimes the term "PURE" is used instead of homozygous.
+                </p>
+                <p>
+                    <b>HETEROZYGOUS</b> When the GENOTYPE is made up of one capital letter & one lowercase letter (ex: Tt) it's called HETEROZYGOUS ("hetero" means "other"). A heterozygous genotype can also be referred to as HYBRID.
+                </p>
+                <p>
+                    <b>PHENOTYPE</b>
+                    <br> How the trait physically shows-up in the organism. Wanna know the simplest way to determine an organism's phenotype ? Look at it. 
+                    <br><i>Examples of phenotypes: blue eyes, brown fur, striped fruit, yellow flowers.</i>
+                </p>
+                <p>
+                    <b>ALLELES</b>
+                    <br> Alternative forms of the same gene. Alleles for a trait are located at corresponding positions on homologous chromosomes. Remember just a second ago when explaining genotypes I said that "one code (letter) comes from ma & one code (letter) comes from pa"? Well "allele" is a fancy word for what I called codes. For example, there is a gene for hair texture (whether hair is curly or straight). One form of the hair texture gene codes for curly hair. A different code for of the same gene makes hair straight. So the gene for hair texture exists as two alleles --- one curly code, and one straight code.
+                </p>
             </div>
-            <div class="modal-body" id="modal-body">
-               
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Instructions on how to conduct the experiment and predict the outcome
+        </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+                <ol>
+                    <li>
+                        <h3>Select the cross type :</h3>
+                        <p>The first step of the experiment would be to select a cross type. Types of cross types available are :</p>
+                        <ol>
+                            <li>Mono-hybrid cross</li>
+                            <li>Di-hybrid cross</li>
+                            <li>Tri-hybrid cross</li>
+                        </ol>
+                        <p>Choose any one cross type from the dropdown list</p>
+                    </li>
+                    <li>
+                        <h3>Select phenotype for the cross.</h3>
+                        <p>Choose phenotype from the dropdown list.</p>
+                        <br>
+                        <ul>
+                            <li>If its a Mono-hybrid cross, you will only be asked to choose phenotype once.</li>
+                            <li>If its a Di-hybrid cross, you will only be asked to choose two phenotype.</li>
+                            <li>If its a Tri-hybrid cross, you will only be asked to choose three phenotype.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>Select Dominant and Recessive parent alleles for the cross.</h3>
+                        <p>List of alleles available for the phenotype chosen are displayed under two sections.
+                        </p>
+                        <ol>
+                            <li>Click the respective radio button to choose a <b>dominant</b> allele.</li>
+                            <li>Click the respective radio button to choose a <b>recessive</b> allele.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h3>Depending on the cross type selection you will be asked to chose only one phenotype for parents or multiple.
+                        </h3>
+                    </li>
+                    <li>
+                        <h3>Generating the outcome.</h3>
+                        <ol>
+                            <li>
+                                Once you have chosen parents for our cross, we can then proceed to generate offspring by clicking on the <b>"Generate Offspring" </b>button at the bottom.
+                            </li>
+                            <li>
+                                You will then be shown your parents selection at the top of the page and the outcome of the experiment right below it.
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h3>Using <b>worksheet </b>to predict the outcome of the experiment.</h3>
+                        <ol>
+                            <li>Download the exercise sheet.
+                                <a href="/documentation/WorkSheet.pdf" download>
+                                    <button type="button" class="btn btn-default btn-lg">
+                                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                    </button>
+                                </a>
+                            </li>
+                            <li>
+                                Fill the blanks in the sheet with information shown on the outcome page.
+                                <ul>
+                                    <li>Cross type</li>
+                                    <li>Phenotype selected</li>
+                                    <li>Dominant allele</li>
+                                    <li>Recessive allele</li>
+                                </ul>
+                            </li>
+                            <li>Also write down the notation for each allele.</li>
+                            <li>Now write down the possible combinations of the alleles on the both sides of the punnett square depending on the cross type.
+                                <ol>
+                                    <li>If the cross type is mono-hybrid, then choose 2*2 punnett square.</li>
+                                    <li>If the cross type is di-hybrid, then choose 4*4 punnett square.</li>
+                                    <li>If the cross type is tri-hybrid, then choose 8*8 punnett square.</li>
+                                </ol>
+                            </li>
+                            <li>Complete the punnett squares.</li>
+                            <li>Write down the results of the punnet squares in outcome section.</li>
+                            <li>Compare your results with the outcome from the experiment.</li>
+                        </ol>
+                    </li>
+                </ol>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    How to use Punnett squares to predict the outcome.
+                </a>
+            </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+
             </div>
         </div>
     </div>
