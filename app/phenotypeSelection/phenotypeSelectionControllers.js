@@ -90,13 +90,15 @@ phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phen
     
     $scope.formatSelectedDataAndReturnFullSelectionDetails = function(dominantPhenotype, recessivePhenotype) {
         return {
-            dominant : {
-                phenotype : dominantPhenotype,
-                genotype : phenotypeFactory.getGenotypeForName(dominantPhenotype)
+            "dominant" : {
+                "phenotype" : dominantPhenotype,
+                "genotype" : phenotypeFactory.getGenotypeForName(dominantPhenotype),
+                "imageLocation" : phenotypeFactory.getImageLocationForName(dominantPhenotype),
             },
-            recessive : {
-                phenotype : recessivePhenotype,
-                genotype : phenotypeFactory.getGenotypeForName(recessivePhenotype)
+            "recessive" : {
+                "phenotype" : recessivePhenotype,
+                "genotype" : phenotypeFactory.getGenotypeForName(recessivePhenotype),
+                "imageLocation" : phenotypeFactory.getImageLocationForName(recessivePhenotype),
             }
         }
     };

@@ -1,0 +1,11 @@
+.radio-img {
+    display: inline-block;
+    height: 40px;
+    width: 55px;
+}
+
+.outcome-image {
+    display: block;
+    height: 75px;
+    width: 100px;
+}

@@ -10,19 +10,55 @@ phenotypeSelectionApp.factory('phenotypeFactory', [function () {
                             "genotype": "+",
                             "descrition": "Wild type",
                             "isDominant": "true",
+                            "imageLocation": "resources/images/redEye.png"
                         },
                         {
                             "name": "White Eye",
                             "genotype": "w",
                             "descrition": "White eyes",
-                            "isDominant": "false"
+                            "isDominant": "false",
+                            "imageLocation": "resources/images/whiteEye.png"
                         },
                         {
-                            "name": "Sepia Eye",
+                            "name": "Orange Eye",
                             "genotype": "se",
-                            "descrition": "Eyes brownish to black with age",
-                            "isDominant": "false"
+                            "descrition": "Orange eyes",
+                            "isDominant": "false",
+                            "imageLocation": "resources/images/orangeEye.png"
+                        },
+                        {
+                            "name": "Eyeless",
+                            "genotype": "e-",
+                            "descrition": "Eyeless Fruit Fly",
+                            "isDominant": "false",
+                            "imageLocation": "resources/images/eyeless.png"
                         }
+                    ]
+                },
+                {
+                    "phenotype": "Wing Type",
+                    "alleles": [
+                        {
+                            "name": "Normal",
+                            "genotype": "+",
+                            "descrition": "Wild type",
+                            "isDominant": "true",
+                            "imageLocation": "resources/images/normalWings.png"
+                        },
+                        {
+                            "name": "Curly",
+                            "genotype": "cy",
+                            "descrition": "Curly Wings",
+                            "isDominant": "true",
+                            "imageLocation": "resources/images/curlyWings.png"
+                        },
+                        {
+                            "name": "Short",
+                            "genotype": "sw",
+                            "descrition": "Short Wings",
+                            "isDominant": "true",
+                            "imageLocation": "resources/images/shortWings.png"
+                        },
                     ]
                 },
                 {
@@ -33,27 +69,31 @@ phenotypeSelectionApp.factory('phenotypeFactory', [function () {
                             "genotype": "+",
                             "descrition": "Wild type",
                             "isDominant": "true",
+                            "imageLocation": "resources/images/curlyWings.png"
                         },
                         {
                             "name": "Eyeless",
                             "genotype": "",
                             "descrition": "Eyes reduced",
-                            "isDominant": "false"
+                            "isDominant": "false",
+                            "imageLocation": "resources/images/curlyWings.png"
                         },
                         {
                             "name": "Lobed",
                             "genotype": "L",
                             "descrition": "Small eyes on pedicule",
-                            "isDominant": "true"
+                            "isDominant": "true",
+                            "imageLocation": "resources/images/curlyWings.png"
                         },
                         {
                             "name": "Bar",
                             "genotype": "B",
                             "descrition": "Long, narrow eyes",
-                            "isDominant": "true"
+                            "isDominant": "true",
+                            "imageLocation": "resources/images/curlyWings.png"
                         }
                     ]
-                }
+                },
             ];
 
             return dataList;
@@ -175,6 +215,17 @@ phenotypeSelectionApp.factory('phenotypeFactory', [function () {
                     phenotype: "Select phenotype for parent type 3",
                     parent: "Select dominant and/or recessive parent type 3 for the cross",
                 },
+            }
+        },
+        getImageLocationForName : function(genotype) {
+            var phenotypeList = this.getPhenotypesList();
+            for (i = 0 ; i < phenotypeList.length ; i++) {
+                var alleles = phenotypeList[i].alleles;
+                for (j = 0 ; j < alleles.length ; j++) {
+                    if(alleles[j].name == genotype) {
+                        return alleles[j].imageLocation;
+                    }
+                }
             }
         }
                                                    

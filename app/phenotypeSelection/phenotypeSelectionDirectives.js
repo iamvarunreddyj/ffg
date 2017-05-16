@@ -19,14 +19,15 @@ phenotypeSelectionApp.directive('selectionDirective', function () {
                         if ($scope.phenotypeOne.dominant != undefined &&
                             $scope.phenotypeOne.recessive != undefined) {
                             // Do nothing
-                            return true;
                         } else {
                             $("p#phenotypeOne").html($scope.errorMessages.phenotypeOne.parent);
                             $scope.displayErrorsForSomeTime(5);
+                            return false;
                         }
                     } else {
                         $("p#phenotypeOne").html($scope.errorMessages.phenotypeOne.phenotype);
                         $scope.displayErrorsForSomeTime(5);
+                        return false;
                     }
                 }
                 if ($scope.triCross() || $scope.diCross()) {
@@ -35,14 +36,15 @@ phenotypeSelectionApp.directive('selectionDirective', function () {
                         if ($scope.phenotypeTwo.dominant != undefined &&
                             $scope.phenotypeTwo.recessive != undefined) {
                             // Do nothing
-                            return true;
                         } else {
-                            $$("p#phenotypeTwo").html($scope.errorMessages.phenotypeTwo.parent);
+                            $("p#phenotypeTwo").html($scope.errorMessages.phenotypeTwo.parent);
                             $scope.displayErrorsForSomeTime(5);
+                            return false;
                         }
                     } else {
                         $("p#phenotypeTwo").html($scope.errorMessages.phenotypeTwo.phenotype);
                         $scope.displayErrorsForSomeTime(5);
+                        return false;
                     }
                 }
                 if ($scope.triCross()) {
@@ -51,17 +53,18 @@ phenotypeSelectionApp.directive('selectionDirective', function () {
                         if ($scope.phenotypeThree.dominant != undefined &&
                             $scope.phenotypeThree.recessive != undefined) {
                             // Do nothing
-                            return true;
                         } else {
                             $("p#phenotypeThree").html($scope.errorMessages.phenotypeThree.parent);
                             $scope.displayErrorsForSomeTime(5);
+                            return false;
                         }
                     } else {
                         $("p#phenotypeThree").html($scope.errorMessages.phenotypeThree.phenotype);
                         $scope.displayErrorsForSomeTime(5);
+                        return false;
                     }
                 }
-
+                
                 return true;
             } // End validate()
         }
