@@ -1,8 +1,10 @@
 var phenotypeSelectionApp = angular.module("phenotypeSelectionModule", []);
 
-phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phenotypeFactory', '$cacheFactory', '$state', function($scope, phenotypeFactory, $cacheFactory, $state) {
+phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phenotypeFactory', '$cacheFactory', '$state', '$timeout', '$element', function($scope, phenotypeFactory, $cacheFactory, $state, $timeout, $element) {
     $scope.phenotypeData = phenotypeFactory.getPhenotypesList();
     $scope.crossTypesAvailable = phenotypeFactory.crossTypesAvailable;
+    $scope.errorMessages = phenotypeFactory.getErrorMessages();
+    $scope.displayErrors = false;
     
     if($cacheFactory.get('offspring')) {
         $scope.cache = $cacheFactory.get('offspring');
@@ -22,15 +24,15 @@ phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phen
         $scope.dataForPhenotypeThree = phenotypeFactory.getMasterDataForSelectedPhenotype($scope.selectedPhenotypeThree);
     });
 
-    $scope.monoHybridCross = function () {
+    $scope.monoCross = function () {
         return $scope.crossCheck($scope.crossType,0)
     };
 
-    $scope.diHybridCross = function () {
+    $scope.diCross = function () {
         return $scope.crossCheck($scope.crossType,1)
     };
 
-    $scope.triHybridCross = function () {
+    $scope.triCross = function () {
         return $scope.crossCheck($scope.crossType,2)
     };
 
@@ -42,18 +44,20 @@ phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phen
     }
 
     $scope.generateOffspring = function() {
-        var parentSelection = $scope.validateAndFetchSelectedData();
-        parentSelection = phenotypeFactory.assignPunnettSquareNotations(parentSelection);
-        $scope.cache.put('f1.parents', parentSelection);
-        var preProcessedSelection = phenotypeFactory.preProcessSelectedData(parentSelection);
-        if(preProcessedSelection != undefined && preProcessedSelection.length > 0) {
-            $scope.offspringResult = phenotypeFactory.predict(phenotypeFactory.prepareForPrediction(preProcessedSelection));
-            if($scope.offspringResult) {
-                $scope.cache.put('f1.results', $scope.offspringResult);
-                $state.go('home.offspringDisplay')
+        if ($scope.validate()) {
+            var parentSelection = $scope.fetchSelectedData();
+            parentSelection = phenotypeFactory.assignPunnettSquareNotations(parentSelection);
+            $scope.cache.put('f1.parents', parentSelection);
+            var preProcessedSelection = phenotypeFactory.preProcessSelectedData(parentSelection);
+            if (preProcessedSelection != undefined && preProcessedSelection.length > 0) {
+                $scope.offspringResult = phenotypeFactory.predict(phenotypeFactory.prepareForPrediction(preProcessedSelection));
+                if ($scope.offspringResult) {
+                    $scope.cache.put('f1.results', $scope.offspringResult);
+                    $state.go('home.offspringDisplay')
+                }
             }
         } else {
-           console.log("Please select required phenotypes.")
+            console.log("Please select required phenotypes.")
         }
     }
     
@@ -62,7 +66,7 @@ phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phen
     $scope.phenotypeTwo = {}
     $scope.phenotypeThree = {}
     
-    $scope.validateAndFetchSelectedData = function () {
+    $scope.fetchSelectedData = function () {
         $scope.selectedData = [];
         if ($scope.phenotypeOne != undefined &&
             $scope.phenotypeOne.dominant != undefined &&
@@ -94,6 +98,14 @@ phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phen
                 genotype : phenotypeFactory.getGenotypeForName(recessivePhenotype)
             }
         }
-    }
+    };
+    
+    $scope.displayErrorsForSomeTime = function(timeInSeconds) {
+        $scope.displayErrors = true;
+        
+        $timeout(function(){
+            $scope.displayErrors = false;
+        }, timeInSeconds*1000);
+    };
 
 }]);

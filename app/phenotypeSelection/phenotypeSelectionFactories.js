@@ -160,6 +160,23 @@ phenotypeSelectionApp.factory('phenotypeFactory', [function () {
                 }
             }
         },
+        getErrorMessages: function () {
+            return {
+                crossType : "Select a cross type",
+                phenotypeOne: {
+                    phenotype: "Select phenotype for parent type 1",
+                    parent: "Select dominant and/or recessive parent type 1 for the cross",
+                },
+                phenotypeTwo: {
+                    phenotype: "Select phenotype for parent type 2",
+                    parent: "Select dominant and/or recessive parent type 2 for the cross",
+                },
+                phenotypeThree: {
+                    phenotype: "Select phenotype for parent type 3",
+                    parent: "Select dominant and/or recessive parent type 3 for the cross",
+                },
+            }
+        }
                                                    
     };
 }]);
