@@ -101,9 +101,9 @@ phenotypeSelectionApp.factory('phenotypeFactory', [function () {
             return offspring;
         },
         crossTypesAvailable : [
-            'Mono-Hybrid',
-            'Di-Hybrid',
-            'Tri-Hybrid'
+            'Mono',
+            'Di',
+            'Tri'
         ],
         getMasterDataForSelectedPhenotype : function(selectedPhenotype) {
             var phenotypeList = this.getPhenotypesList();

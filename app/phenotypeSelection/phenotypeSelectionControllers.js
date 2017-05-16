@@ -48,6 +48,7 @@ phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phen
             var parentSelection = $scope.fetchSelectedData();
             parentSelection = phenotypeFactory.assignPunnettSquareNotations(parentSelection);
             $scope.cache.put('f1.parents', parentSelection);
+            $scope.cache.put('f1.crossType', $scope.crossType);
             var preProcessedSelection = phenotypeFactory.preProcessSelectedData(parentSelection);
             if (preProcessedSelection != undefined && preProcessedSelection.length > 0) {
                 $scope.offspringResult = phenotypeFactory.predict(phenotypeFactory.prepareForPrediction(preProcessedSelection));

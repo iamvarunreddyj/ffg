@@ -7,5 +7,6 @@ offspringDisplay.controller('offspringDisplayController',['$scope', '$state', '$
     if($scope.cache) {
         $scope.fOneOffspring = $scope.cache.get('f1.results');
         $scope.fOneParents = $scope.cache.get('f1.parents');
+        $scope.fOneCrossType = $scope.cache.get('f1.crossType');
     }
 }]);
