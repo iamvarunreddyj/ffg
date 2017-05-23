@@ -20,7 +20,7 @@
             <div class="radio" ng-repeat="data in dataForPhenotypeOne" id="eyeShapeSelection">
                 <label>
                     <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="phenotypeOne.dominant">
-                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}} 
+                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b><b class="genotype">{{data.genotype}}</b> 
                     <img class="radio-img" src="{{data.imageLocation}}" alt="image">
                 </label>
             </div>
@@ -31,7 +31,7 @@
             <div class="radio" ng-repeat="data in dataForPhenotypeOne" id="eyeShapeSelection">
                 <label>
                     <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="phenotypeOne.recessive">
-                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
+                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b><b class="genotype">{{data.genotype}}</b> 
                     <img class="radio-img" src="{{data.imageLocation}}" alt="image">
                 </label>
             </div>
@@ -51,7 +51,7 @@
             <div class="radio" ng-repeat="data in dataForPhenotypeTwo" id="eyeShapeSelection">
                 <label>
                     <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="phenotypeTwo.dominant">
-                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
+                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b><b class="genotype">{{data.genotype}}</b> 
                     <img class="radio-img" src="{{data.imageLocation}}" alt="image">
                 </label>
             </div>
@@ -61,7 +61,7 @@
             <div class="radio" ng-repeat="data in dataForPhenotypeTwo" id="eyeShapeSelection">
                 <label>
                     <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="phenotypeTwo.recessive">
-                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
+                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b><b class="genotype">{{data.genotype}}</b> 
                     <img class="radio-img" src="{{data.imageLocation}}" alt="image">
                 </label>
             </div>
@@ -81,7 +81,7 @@
             <div class="radio" ng-repeat="data in dataForPhenotypeThree" id="eyeShapeSelection">
                 <label>
                     <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="phenotypeThree.dominant">
-                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
+                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b><b class="genotype">{{data.genotype}}</b> 
                     <img class="radio-img" src="{{data.imageLocation}}" alt="image">
                 </label>
             </div>
@@ -91,7 +91,7 @@
             <div class="radio" ng-repeat="data in dataForPhenotypeThree" id="eyeShapeSelection">
                 <label>
                     <input type="radio" id="inlineRadio{{data.name}}" value="{{data.name}}" ng-model="phenotypeThree.recessive">
-                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b> {{data.genotype}}
+                    <b>Name :</b>{{data.descrition}}    <b>Genotype :</b><b class="genotype">{{data.genotype}}</b> 
                     <img class="radio-img" src="{{data.imageLocation}}" alt="image">
                 </label>
             </div>

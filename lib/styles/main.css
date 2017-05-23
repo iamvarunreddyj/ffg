@@ -1,11 +1,23 @@
 .radio-img {
     display: inline-block;
-    height: 40px;
-    width: 55px;
+    height: 30px;
+    width: 45px;
 }
 
 .outcome-image {
     display: block;
     height: 75px;
     width: 100px;
+}
+
+.genotype {
+    font-size: 20px;
+}
+
+label b {
+    margin: 15px;
+}
+
+input[type=radio] {
+    margin-top: 8px !important;
 }
