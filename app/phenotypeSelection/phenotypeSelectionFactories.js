@@ -202,19 +202,20 @@ phenotypeSelectionApp.factory('phenotypeFactory', [function () {
         },
         getErrorMessages: function () {
             return {
-                crossType : "Select a cross type",
+                crossType : "<b>Please select a cross type.</b>",
                 phenotypeOne: {
-                    phenotype: "Select phenotype for parent type 1",
-                    parent: "Select dominant and/or recessive parent type 1 for the cross",
+                    phenotype: "<b>Please select phenotype for parent type 1.</b>",
+                    parent: "<b>Select dominant and/or recessive parent type 1 for the cross.</b>",
                 },
                 phenotypeTwo: {
-                    phenotype: "Select phenotype for parent type 2",
-                    parent: "Select dominant and/or recessive parent type 2 for the cross",
+                    phenotype: "<b>Please select phenotype for parent type 2.</b>",
+                    parent: "<b>Select dominant and/or recessive parent type 2 for the cross.</b>",
                 },
                 phenotypeThree: {
-                    phenotype: "Select phenotype for parent type 3",
-                    parent: "Select dominant and/or recessive parent type 3 for the cross",
+                    phenotype: "<b>Please select phenotype for parent type 3.</b>",
+                    parent: "<b>Select dominant and/or recessive parent type 3 for the cross.</b>",
                 },
+                genericMessageOne: "Cannot generate offspring ! "
             }
         },
         getImageLocationForName : function(genotype) {

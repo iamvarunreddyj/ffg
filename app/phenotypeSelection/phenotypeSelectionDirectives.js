@@ -8,7 +8,7 @@ phenotypeSelectionApp.directive('selectionDirective', function () {
                 
                 if($scope.crossType == undefined || $scope.crossType == "") {
                     
-                    $("p#crossType").html($scope.errorMessages.crossType);
+                    $("p#crossType").html($scope.errorMessages.genericMessageOne + $scope.errorMessages.crossType);
                     $scope.displayErrorsForSomeTime(5);
                     return false;
                 }
@@ -20,12 +20,12 @@ phenotypeSelectionApp.directive('selectionDirective', function () {
                             $scope.phenotypeOne.recessive != undefined) {
                             // Do nothing
                         } else {
-                            $("p#phenotypeOne").html($scope.errorMessages.phenotypeOne.parent);
+                            $("p#phenotypeOne").html($scope.errorMessages.genericMessageOne + $scope.errorMessages.phenotypeOne.parent);
                             $scope.displayErrorsForSomeTime(5);
                             return false;
                         }
                     } else {
-                        $("p#phenotypeOne").html($scope.errorMessages.phenotypeOne.phenotype);
+                        $("p#phenotypeOne").html($scope.errorMessages.genericMessageOne + $scope.errorMessages.phenotypeOne.phenotype);
                         $scope.displayErrorsForSomeTime(5);
                         return false;
                     }
@@ -37,12 +37,12 @@ phenotypeSelectionApp.directive('selectionDirective', function () {
                             $scope.phenotypeTwo.recessive != undefined) {
                             // Do nothing
                         } else {
-                            $("p#phenotypeTwo").html($scope.errorMessages.phenotypeTwo.parent);
+                            $("p#phenotypeTwo").html($scope.errorMessages.genericMessageOne + $scope.errorMessages.phenotypeTwo.parent);
                             $scope.displayErrorsForSomeTime(5);
                             return false;
                         }
                     } else {
-                        $("p#phenotypeTwo").html($scope.errorMessages.phenotypeTwo.phenotype);
+                        $("p#phenotypeTwo").html($scope.errorMessages.genericMessageOne + $scope.errorMessages.phenotypeTwo.phenotype);
                         $scope.displayErrorsForSomeTime(5);
                         return false;
                     }
@@ -54,12 +54,12 @@ phenotypeSelectionApp.directive('selectionDirective', function () {
                             $scope.phenotypeThree.recessive != undefined) {
                             // Do nothing
                         } else {
-                            $("p#phenotypeThree").html($scope.errorMessages.phenotypeThree.parent);
+                            $("p#phenotypeThree").html($scope.errorMessages.genericMessageOne + $scope.errorMessages.phenotypeThree.parent);
                             $scope.displayErrorsForSomeTime(5);
                             return false;
                         }
                     } else {
-                        $("p#phenotypeThree").html($scope.errorMessages.phenotypeThree.phenotype);
+                        $("p#phenotypeThree").html($scope.errorMessages.genericMessageOne + $scope.errorMessages.phenotypeThree.phenotype);
                         $scope.displayErrorsForSomeTime(5);
                         return false;
                     }
