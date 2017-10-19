@@ -21,3 +21,112 @@ label b {
 input[type=radio] {
     margin-top: 8px !important;
 }
+
+.block__list {
+  padding: 20px 0;
+  background-color: #fff;
+}
+
+.block__list_tags {
+  padding-left: 30px;
+}
+
+.block__list_tags:after {
+  clear: both;
+  content: '';
+  display: block;
+}
+
+.block__list_tags li {
+  color: #fff;
+  float: left;
+  padding: 5px 10px;
+  min-width: 10px;
+  margin: 8px 20px 10px 0;
+  background-color: #5F9EDF;
+  text-align: center;
+}
+
+.simpleDemo li span {
+  display: block;
+  padding: 2px;
+}
+
+.simpleDemo li span:last-child {
+  background-color: black;
+}
+
+.block__list_words li {
+  float: none !important;
+  list-style-type: none;
+}
+
+.simpleDemo ul {
+  min-height: 42px;
+  padding-left: 0px;
+}
+
+.simpleDemo ul .dndDraggingSource {
+  display: none;
+}
+
+.simpleDemo ul .dndPlaceholder {
+  background-color: #ddd;
+  display: block;
+  min-height: 50px;
+  min-width: 50px;
+}
+
+.simpleDemo ul li {
+  background-color: #337ab7;
+  border: none;
+  border-radius: .25em;
+  color: #fff;
+  float: left;
+  font-weight: 700;
+  min-height: 25px;
+  margin: 5px;
+  padding: 5px 10px;
+  text-align: center;
+  min-width: 10px;
+  list-style-type: none;
+}
+
+.panel {
+  margin: 15px !important;
+}
+
+#next-gen-error-message {
+  color: #d9534f;
+  font-weight: 700;
+  font-size: 15px;
+  display: none;
+}
+
+#next-gen-success-message {
+  color: #5cb85c;
+  font-weight: 700;
+  font-size: 15px;
+  display: none;
+}
+
+.badge-danger {
+  background-color: #d9534f;
+}
+
+.badge-success{
+  background-color: #5cb85c;
+}
+
+.red-panel > .panel-info {
+  border-color: #e71e0e !important;
+}
+
+.red-panel > .panel-info > .panel-heading {
+  background-color: #f6f7f8 !important;
+  border-color: #e71e0e !important;
+}
+
+/*.table > tbody > tr > td > div {
+  display: inline-block;
+}*/

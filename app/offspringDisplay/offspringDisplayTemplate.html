@@ -1,50 +1,169 @@
 <div class="container">
+  <div class="row">
+
     <div class="row">
-        <div class="row">
-            <h3><b>Parents</b></h3>
-            <p><b>Cross Type : {{fOneCrossType}}</b></p>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Selection</th>
-                        <th>Dominant</th>
-                        <th>Recessive</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="data in fOneParents track by $index">
-                        <td>Selection {{$index + 1}}</td>
-                        <td>
-                            <p><b>Phenotype : </b>{{data.dominant.phenotype}}</p>
-                            <p><b>Genotype : </b>{{data.dominant.genotype}}</p>
-                            <p><b>Punnet Square Representation : </b>{{data.dominant.alphabet}}</p>
-                            <img class="outcome-image" src="{{data.dominant.imageLocation}}"  alt="image">
-                        </td>
-                        <td>
-                            <p><b>Phenotype : </b>{{data.recessive.phenotype}}</p>
-                            <p><b>Genotype : </b>{{data.recessive.genotype}}</p>
-                            <p><b>Punnet Square Representation : </b>{{data.recessive.alphabet}}</p>
-                            <img class="outcome-image" src="{{data.recessive.imageLocation}}"  alt="image">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
 
-            <p>* Download the worksheet, finish the punnett squares, summarize the outcome and compare the results.
-                <a href="documentation/WorkSheet.pdf" download>
-                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                </a>
-            </p>
-
-            <h3><b>Experiment outcome</b></h3>
-            <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" ng-repeat="data in fOneOffspring track by $index">
-                <div class="thumbnail">
-                    <div class="caption">
-                        <h3>{{data}}</h3>
-                    </div>
+      <!-- Initial selection details -->
+      <div class="collapse" id="initialSelectionDetails">
+        <p><b>Cross Type : {{crossTypes[0]}}</b></p>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Selection</th>
+              <th>Dominant</th>
+              <th>Recessive</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="data in parents[0] track by $index">
+              <td>Selection {{$index + 1}}</td>
+              <td>
+                <div>
+                  <p><b>Phenotype : </b>{{data.dominant.phenotype}}</p>
+                  <p><b>Genotype : </b>{{data.dominant.genotype}}</p>
+                  <p><b>Punnet Square Representation : </b>{{data.dominant.alphabet}}</p>
                 </div>
+                <div>
+                  <img class="outcome-image" src="{{data.dominant.imageLocation}}"  alt="image">
+                </div>
+              </td>
+              <td>
+                <div>
+                  <p><b>Phenotype : </b>{{data.recessive.phenotype}}</p>
+                  <p><b>Genotype : </b>{{data.recessive.genotype}}</p>
+                  <p><b>Punnet Square Representation : </b>{{data.recessive.alphabet}}</p>
+                </div>
+                <div>
+                  <img class="outcome-image" src="{{data.recessive.imageLocation}}"  alt="image">
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <!-- Current generation details -->
+      <!-- <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> -->
+      <div>
+        <!-- <p id="next-gen-error-message"><p>
+        <p id="next-gen-success-message"><p> -->
+        <h3>Current cross: <b>{{shortenedParents[currentGeneration][0]}} X {{shortenedParents[currentGeneration][1]}}</b>
+          <button type="button" id="lineChartSelectionBtn" class="btn btn-primary" data-toggle="collapse" href="#lineChart" aria-expanded="false" style="float:right">
+            <i class="fa fa-line-chart" aria-hidden="true"></i>
+          </button>
+
+          <button type="button" id="initialSelectionBtn" class="btn btn-primary" data-toggle="collapse" href="#initialSelectionDetails" aria-expanded="false" style="float:right;margin-right:10px;">
+            Initial selection details &nbsp; <span id="initialSelectionGlyphicon" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </button>
+          <!-- Button for previous generations content display -->
+          <button type="button" id="previousGenBtn" class="btn btn-primary" data-toggle="collapse" href="#previousGenerations" aria-expanded="false" style="float:right;margin-right:10px;">
+            Previous generation details &nbsp; <span id="prevGenGlyphicon" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </button>
+        </h3>
+
+        <!-- Current generation outcome display  -->
+        <div class="simpleDemo row">
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Current generation outcome</h3>
             </div>
+            <div class="panel-body">
+              <p><b>There are {{offspringsShortened[currentGeneration].length}} distinct phenotypes.</b></p>
+              <ul dnd-list="offspringsShortened[currentGeneration]"
+                dnd-effect-allowed="move"
+                >
+                <li
+                ng-repeat="item in offspringsShortened[currentGeneration]"
+                dnd-draggable="item"
+                dnd-type="'item'"
+                dnd-moved="offspringsShortened[currentGeneration].splice($index, 1)"
+                dnd-effect-allowed="copyMove"
+                draggable="true">
+                  <span>{{item.notation}} ({{item.occurence}})</span><span>{{$index}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <!-- Next generation offspring parent selection bucket -->
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="position:fixed;bottom:10px;right:10px;z-index:99">
+        <p id="next-gen-error-message"><p>
+        <p id="next-gen-success-message"><p>
+        <div class="simpleDemo row red-panel">
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Drop two offspring here for next generation of offspring</h3>
+            </div>
+            <div class="panel-body">
+              <ul dnd-list="nextGenSelection"
+              dnd-effect-allowed="copy"
+              dnd-disable-if="nextGenSelection.length >= 2"
+              >
+                <li ng-repeat="item in nextGenSelection"
+                dnd-draggable="item"
+                dnd-moved="nextGenSelection.splice($index, 1)"
+                dnd-effect-allowed="move"
+                >
+                {{item.notation}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <button style="margin-top:5px" class="btn btn-primary" type="submit" ng-click="checkForNextGenSelection(nextGenSelection)" >Generate Next Offspring</button>
+        <button style="margin-top:5px" class="btn btn-primary" type="submit" ng-click="startOver()" >Start Over</button>
+
+
+        <!-- <div class="row">
+            <button style="margin:0 0 0 15px" class="btn btn-primary" type="submit" ng-click="checkForNextGenSelection(nextGenSelection)" >Generate Next Offspring</button>
+            <button style="margin:20px 0 0 15px" class="btn btn-primary" type="submit" ng-click="startOver()" >Start Over</button>
+        </div> -->
+      </div>
+
+      <div>
+        <!-- Line chart for distict no of phenotypes for all generations -->
+        <!-- Width and height only works when responsive is set to false in options. It is true by default -->
+          <div class="collapse in" id="lineChart">
+            <canvas class="col-md-8" id="distinctPhenotypes"></canvas>
+          </div>
+      </div>
 
     </div>
+  </div>
+
+  <!-- Previous generation details -->
+  <div class="collapse" id="previousGenerations">
+    <div class="card card-block">
+      <div class="row" ng-repeat="data in shortenedParents | orderBy:'$index':false" >
+        <div class="simpleDemo row">
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Cross : {{data[0]}} X {{data[1]}}</h3>
+            </div>
+            <div class="panel-body">
+              <div style="display:inline-block;">
+                <p><b>There are {{offspringsShortened[offspringsShortened.size-$index].length}} distinct phenotypes.</b></p>
+                <ul dnd-list="offspringsShortened[$index]">
+                  <li
+                  ng-repeat="item in offspringsShortened[$index]"
+                  dnd-draggable="item"
+                  dnd-moved="offspringsShortened[$parent.$index].splice($index, 1)"
+                  dnd-effect-allowed="copyMove">
+                    <span>{{item.notation}} ({{item.occurence}})</span><span>{{$index}}</span>
+                  </li>
+                </ul>
+              </div>
+              <canvas style="float:right;display:inline-block; width:300px;height:150px" id="{{'ratioChart-'+$index}}"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <canvas style="float:right;display:inline-block; width:400px;height250px" id="donut"></canvas> -->
+
 </div>

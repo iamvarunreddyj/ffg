@@ -1,17 +1,32 @@
-var phenotypeSelectionApp = angular.module("phenotypeSelectionModule", []);
+var phenotypeSelectionApp = angular.module("phenotypeSelectionModule", ['offspringDisplayModule']);
 
-phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phenotypeFactory', '$cacheFactory', '$state', '$timeout', '$element', function($scope, phenotypeFactory, $cacheFactory, $state, $timeout, $element) {
+phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phenotypeFactory', '$cacheFactory', '$state', '$timeout', '$element', 'offspringDisplayFactory', function($scope, phenotypeFactory, $cacheFactory, $state, $timeout, $element, offspringDisplayFactory) {
     $scope.phenotypeData = phenotypeFactory.getPhenotypesList();
     $scope.crossTypesAvailable = phenotypeFactory.crossTypesAvailable;
     $scope.errorMessages = phenotypeFactory.getErrorMessages();
     $scope.displayErrors = false;
-    
-    if($cacheFactory.get('offspring')) {
-        $scope.cache = $cacheFactory.get('offspring');
+
+
+    if (typeof(sessionStorage) !== "undefined") {
+      if(sessionStorage.getItem('offsprings')) {
+          $scope.parents = angular.fromJson(sessionStorage.getItem('parents'));
+          $scope.crossTypes = angular.fromJson(sessionStorage.getItem('crossTypes'));
+          $scope.offsprings = angular.fromJson(sessionStorage.getItem('offsprings'));
+          $scope.offspringsShortened = angular.fromJson(sessionStorage.getItem('offspringsShortened'));
+          $scope.analyzedData = angular.fromJson(sessionStorage.getItem('analyzedData'));
+          $scope.shortenedParents = angular.fromJson(sessionStorage.getItem('shortenedParents'));
+      } else {
+        $scope.parents = [];
+        $scope.crossTypes = [];
+        $scope.offsprings = [];
+        $scope.offspringsShortened = [];
+        $scope.analyzedData = [];
+        $scope.shortenedParents = [];
+      }
     } else {
-        $scope.cache = $cacheFactory('offspring');
+        console.log("Sorry! No Web Storage support..");
     }
-    
+
     $scope.$watch('selectedPhenotypeOne', function() {
         $scope.dataForPhenotypeOne = phenotypeFactory.getMasterDataForSelectedPhenotype($scope.selectedPhenotypeOne);
     });
@@ -47,26 +62,37 @@ phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phen
         if ($scope.validate()) {
             var parentSelection = $scope.fetchSelectedData();
             parentSelection = phenotypeFactory.assignPunnettSquareNotations(parentSelection);
-            $scope.cache.put('f1.parents', parentSelection);
-            $scope.cache.put('f1.crossType', $scope.crossType);
+            $scope.parents.push(parentSelection);
+            $scope.crossTypes.push($scope.crossType);
             var preProcessedSelection = phenotypeFactory.preProcessSelectedData(parentSelection);
             if (preProcessedSelection != undefined && preProcessedSelection.length > 0) {
-                $scope.offspringResult = phenotypeFactory.predict(phenotypeFactory.prepareForPrediction(preProcessedSelection));
+                var notation = phenotypeFactory.concatArrayContents(preProcessedSelection);
+                $scope.shortenedParents.push([notation,notation]);
+                $scope.offspringResult = phenotypeFactory.predict([phenotypeFactory.prepareForPrediction(preProcessedSelection),phenotypeFactory.prepareForPrediction(preProcessedSelection)]);
                 if ($scope.offspringResult) {
-                    $scope.cache.put('f1.results', $scope.offspringResult);
-                    $state.go('home.offspringDisplay')
+                    // Offspring results
+                    $scope.offsprings.push($scope.offspringResult);
+                    $scope.offspringsShortened.push(phenotypeFactory.shortenOutcome($scope.offspringResult));
+
+                    // Data analysis for visualization
+                    // Analyze data for current generation.
+                    $scope.analyzedData.push(offspringDisplayFactory.analyzeData($scope.offspringResult, parentSelection));
+
+                    // Store data in sessionStorage
+                    phenotypeFactory.saveDataToSessionStorage($scope);
+                    $state.go('home.offspringDisplay');
                 }
             }
         } else {
-            console.log("Please select required phenotypes.")
+            console.log("Please select required phenotypes.");
         }
     }
-    
+
     // Phenotype data
     $scope.phenotypeOne = {}
     $scope.phenotypeTwo = {}
     $scope.phenotypeThree = {}
-    
+
     $scope.fetchSelectedData = function () {
         $scope.selectedData = [];
         if ($scope.phenotypeOne != undefined &&
@@ -87,7 +113,7 @@ phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phen
 
         return $scope.selectedData;
     }
-    
+
     $scope.formatSelectedDataAndReturnFullSelectionDetails = function(dominantPhenotype, recessivePhenotype) {
         return {
             "dominant" : {
@@ -102,10 +128,10 @@ phenotypeSelectionApp.controller("phenotypeSelectionController",['$scope', 'phen
             }
         }
     };
-    
+
     $scope.displayErrorsForSomeTime = function(timeInSeconds) {
         $scope.displayErrors = true;
-        
+
         $timeout(function(){
             $scope.displayErrors = false;
         }, timeInSeconds*1000);

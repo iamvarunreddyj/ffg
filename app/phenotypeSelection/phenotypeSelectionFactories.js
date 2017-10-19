@@ -99,6 +99,11 @@ phenotypeSelectionApp.factory('phenotypeFactory', [function () {
             return dataList;
         },
         prepareForPrediction : function(selection) {
+          /*
+            Input : [[A,a],[B,b]]
+            Ouput : [[A,B], [A,b], [a,B], [a,b]]
+
+          */
             var result = [];
             if(selection.length == 3) {
                 for(i=0; i < selection[0].length; i++) {
@@ -121,18 +126,29 @@ phenotypeSelectionApp.factory('phenotypeFactory', [function () {
             return result;
         },
         predict : function(predictionSource) {
+          /*
+            Input: [[[A,B],[A,b],[a,B],[a,b]], [[A,B],[A,B],[A,B],[A,B]]]
+            Ouput: [AABB, AAbB, aABB, aAbB, AABB, AAbB, aABB, aAbB, AABB, AAbB, aABB, aAbB, AABB, AAbB, aABB, aAbB]
 
+          */
             var offspring = [];
-            for (i=0; i<predictionSource.length; i++) {
-                for(j=0; j<predictionSource.length; j++) {
-                    if(Array.isArray(predictionSource[i])) {
+            var sourceX = predictionSource;
+            var sourceY = predictionSource;
+            if(predictionSource.length === 2) {
+              sourceX = predictionSource[0];
+              sourceY = predictionSource[1];
+            }
+
+            for (i=0; i<sourceX.length; i++) {
+                for(j=0; j<sourceY.length; j++) {
+                    if(Array.isArray(sourceX[i])) {
                         var outcome = "";
-                        for(k=0; k<predictionSource[i].length; k++) {
-                            outcome = outcome.concat(predictionSource[i][k].concat(predictionSource[j][k]));
+                        for(k=0; k<sourceX[i].length; k++) {
+                            outcome = outcome.concat(sourceX[i][k].concat(sourceY[j][k]));
                         }
                         offspring.push(outcome);
                     } else {
-                        offspring.push(predictionSource[i].concat(predictionSource[j]));
+                        offspring.push(sourceX[i].concat(sourceY[j]));
                     }
 
                 }
@@ -185,7 +201,7 @@ phenotypeSelectionApp.factory('phenotypeFactory', [function () {
              angular.forEach(selectedData, function (value, key) {
                 preProcessedSelection.push([value.dominant.alphabet, value.recessive.alphabet])
             });
-            
+
             return preProcessedSelection;
         },
         formatSelectedDataAndReturnFullSelectionDetails: function (dominantPhenotype, recessivePhenotype) {
@@ -228,7 +244,80 @@ phenotypeSelectionApp.factory('phenotypeFactory', [function () {
                     }
                 }
             }
+        },
+        shortenOutcome : function(input) {
+            /*
+            * input : [AA, Aa, aA, aa]
+            * Output : {AA : 1, Aa : 2, aa: 1}
+            */
+            var inputCopy = input.slice();
+            var shortenedOutcome = [];
+            for(var i=0; i<inputCopy.length; i++) {
+                if(inputCopy[i] !== "") {
+                    var compareWith = inputCopy[i];
+                    var count = 1;
+                    for (var j=(i+1); j<inputCopy.length; j++ ) {
+                        if(inputCopy[j] !== "") {
+                            var diff = 0;
+                            var compareTo = inputCopy[j];
+                            for(var k=0; k<compareWith.length; k++) {
+                                var index = compareTo.indexOf(compareWith[k]);
+                                if(index === -1) {
+                                  diff = 1;
+                                  break;
+                                } else {
+                                  compareTo = compareTo.slice(0,index) + compareTo.slice(index+1);
+                                }
+                            }
+                            if(diff === 0) {
+                              ++count;
+                              inputCopy[j] = "";
+                            }
+                        }
+                    }
+                    shortenedOutcome.push({"notation" : compareWith, "occurence": count});
+                }
+            }
+            return shortenedOutcome;
+        },
+        processGenerationSelection: function(data) {
+          /*
+              Input:   [AaBbCc, AABBCC]
+              Output:  [[[A,a],[B,b],[C,c]],[[A,A],[B,B],[C,C]]]
+          */
+
+            var self = this;
+            var outcome = [];
+            for (i=0; i<data.length; i++) {
+              var length = data[i].length;
+              var halfBakedData = [];
+              for(j=0; j<length/2; j++) {
+                halfBakedData.push([data[i][j*2], data[i][(j*2)+1]]);
+              }
+              outcome.push(halfBakedData);
+            }
+
+            return outcome;
+        },
+        concatArrayContents: function(input){
+          var output = "";
+          angular.forEach(input, function(value, key) {
+              if(Array.isArray(value)) {
+                output = output.concat(value.join(""));
+              } else {
+                output = output.concat(value);
+              }
+          });
+
+          return output;
+        },
+        saveDataToSessionStorage: function(data) {
+          sessionStorage.setItem('parents', JSON.stringify(data.parents));
+          sessionStorage.setItem('shortenedParents', JSON.stringify(data.shortenedParents));
+          sessionStorage.setItem('crossTypes', JSON.stringify(data.crossTypes));
+          sessionStorage.setItem('offsprings', JSON.stringify(data.offsprings));
+          sessionStorage.setItem('offspringsShortened', JSON.stringify(data.offspringsShortened));
+          sessionStorage.setItem('analyzedData', JSON.stringify(data.analyzedData));
         }
-                                                   
     };
 }]);

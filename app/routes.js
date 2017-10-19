@@ -7,7 +7,7 @@ flyGenetics.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
         })
         .state('home.welcome', {
             url: '/welcome',
-            
+
             controller: 'welcomePageController',
             views : {
                 '' : {templateUrl: 'app/welcomePage/welcomePage.html'},
@@ -30,6 +30,11 @@ flyGenetics.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
             url: '/offspringDisplay',
             templateUrl: 'app/offspringDisplay/offspringDisplayTemplate.html',
             controller: 'offspringDisplayController'
+        })
+        .state('home.generationDisplay', {
+            url: '/generationDisplay',
+            templateUrl: 'app/generationDisplay/generationDisplay.html',
+            controller: 'generationDisplayController'
         })
 
 
