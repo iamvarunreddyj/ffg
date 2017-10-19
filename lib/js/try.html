@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ortable: `put: []` demo</title>
+  <style type="text/css">
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    background: #eee;
+    margin: 1px;
+    padding: 5px 10px;
+  }
+
+  .sortable-ghost {
+    opacity: .6;
+  }
+  </style>
+
+  <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="bootstrap.min.css"/>
+  
+  
+  <!-- Latest Sortable -->
+  <script src="Sortable.js"></script>
+
+
+</head>
+<body>
+
+  <!-- sort: true -->
+  <div id="sortTrue" class="list-group">
+    <div class="list-group-item">foo</div>
+    <div class="list-group-item">bar</div>
+    <div class="list-group-item">baz</div>
+  </div>
+  
+  
+  <!-- sort: false -->
+  <div id="sortFalse" class="list-group">
+    <div class="list-group-item">qux</div>
+    <div class="list-group-item">quux</div>
+  </div>
+
+  <!-- <ul id="qux">
+    <li>qux 1</li>
+  </ul> -->
+
+  <script type="text/javascript">
+ // sort: true
+Sortable.create(sortTrue, {
+  group: "sorting",
+  sort: true
+});
+
+// sort: false
+Sortable.create(sortFalse, {
+  group: "sorting",
+  sort: false
+});
+
+
+
+  // Sortable.create(foo, {
+  //   group: 'foo',
+  //   animation: 100
+  // });
+  //
+  // Sortable.create(bar, {
+  //   group: {
+  //     name: 'bar',
+  //     put: 'qux',
+  //     pull: function (to, from) {
+  //       return from.el.children.length > 2 || 'clone';
+  //     }
+  //   },
+  //   animation: 100
+  // });
+  //
+  // Sortable.create(qux, {
+  //   group: {
+  //     name: 'qux',
+  //     put: function (to) {
+  //       return to.el.children.length < 4;
+  //     }
+  //   },
+  //   animation: 100
+  // });
+
+  </script>
+
+
+</body>
+</html>
